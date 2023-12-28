@@ -57,7 +57,7 @@ class ParkingLostTest {
 	 * @return - none
 	 */
 	@Test
-	void testParkCars() {
+	void givenACar_AddToParkingLot_ReturnBoolean() {
 		System.out.println("Test Park Cars");
 		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
 		Car car4 = new Car("MH-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver");
@@ -76,7 +76,7 @@ class ParkingLostTest {
 	 * @return - none
 	 */
 	@Test
-	void testUnparkCars() {
+	void givenACar_RemoveFromParkingLot_ReturnHome() {
 		System.out.println("Test Unpark Cars");
 		parkingLot.unparkCar("MH-12-1234");
 
@@ -93,7 +93,7 @@ class ParkingLostTest {
 	 * @return - none
 	 */
 	@Test
-	void testNotifyObservers() {
+	void givenAlot_CheckLot_ReturnSign() {
 		System.out.println("Test Notify Observers");
 		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
 		Car car4 = new Car("MH-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver");

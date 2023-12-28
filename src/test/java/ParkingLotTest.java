@@ -18,7 +18,7 @@ import com.bridgelabz.ParkingObservers;
  * 			 testNotifyObservers() - tests the notifyObservers() method
  * 
  */
-class ParkingLostTest {
+class ParkingLotTest {
 	ParkingLot parkingLot;
 	ParkingObservers owner;
 	Car car1;

@@ -3,8 +3,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.bridgelabz.model.Car;
-import com.bridgelabz.model.ParkingLot;
+import com.bridgelabz.Car;
+import com.bridgelabz.ParkingLot;
 
 class ParkingLostTest {
 	ParkingLot parkingLot;
@@ -26,7 +26,7 @@ class ParkingLostTest {
 	}
 
        @Test
-	void givenACar_RemoveFromParkingLot_Returnhome() {
+	void givenACar_RemoveFromParkingLot_ReturnHome() {
 		parkingLot.unparkCar("MH-12-1234");
 
         assertFalse(parkingLot.getParkedCars().contains(car1));

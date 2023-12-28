@@ -3,8 +3,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.bridgelabz.model.Car;
-import com.bridgelabz.model.ParkingLot;
+import com.bridgelabz.Car;
+import com.bridgelabz.ParkingLot;
 
 class ParkingLostTest {
 	ParkingLot parkingLot;

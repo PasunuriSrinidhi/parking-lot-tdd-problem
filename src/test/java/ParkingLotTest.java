@@ -26,7 +26,7 @@ class ParkingLostTest {
 	}
 
        @Test
-	void givenACar_RemoveFromParkingLot_Returnhome() {
+	void givenACar_RemoveFromParkingLot_ReturnHome() {
 		parkingLot.unparkCar("MH-12-1234");
 
         assertFalse(parkingLot.getParkedCars().contains(car1));

@@ -2,7 +2,8 @@ package com.bridgelabz;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import com.bridgelabz.observers.ParkingObservers;
+
+import com.bridgelabz.ParkingObservers;
 
 /*
  * @Description - ParkingLot class to park and unpark cars and notify observers about parking lot status

@@ -19,13 +19,17 @@ class ParkingLostTest {
 	void givenACar_AddToParkingLot_ReturnBoolean() {
 		Car car1 = new Car("MH-12-1234", "BMW", "White");
 		Car car2 = new Car("MH-12-1235", "Audi TT", "Goodwood Green Pearl");
-
 		parkingLot.parkCar(car1);
 		parkingLot.parkCar(car2);
-
-		parkingLot.printParkedCars();
-
+                parkingLot.printParkedCars();
 		assertEquals(2, parkingLot.getParkedCars().size());
 	}
 
+       @Test
+	void givenACar_RemoveFromParkingLot_Returnhome() {
+		parkingLot.unparkCar("MH-12-1234");
+
+        assertFalse(parkingLot.getParkedCars().contains(car1));
+        assertTrue(parkingLot.getParkedCars().contains(car2));
+	}
 }

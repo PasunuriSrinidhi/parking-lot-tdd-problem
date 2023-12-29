@@ -28,8 +28,8 @@ class ParkingLotTest {
 	@BeforeEach
 	void setUp() throws Exception {
 	parkingLot = new ParkingLot(3);// Create a parking lot with capacity 3
-		manager = new ParkingManager();// Create a parking manager
-		parkingLot.addObservers(manager);// Add the manager to the list of observers
+		owner= new ParkingOwner();// Create a parking owner
+		parkingLot.addObservers(owner);// Add the owner to the list of observers
 
 		// Create two cars
 		System.out.println();
@@ -73,7 +73,7 @@ class ParkingLotTest {
 }
 
 	@Test
-	void givenALot_CheckIfotIsFull_ReturnSign() {
+	void givenALot_CheckIfItIsFull_ReturnSign() {
 		System.out.println("Test Notify Observers");
 		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
 		Car car4 = new Car("MH-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver");

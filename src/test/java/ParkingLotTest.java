@@ -69,7 +69,7 @@ class ParkingLotTest {
                 assertFalse(parkingLot.getParkedCars().contains(car1));
 		assertTrue(parkingLot.getParkedCars().contains(car2));
 		System.out.println();
-}
+     }
 
 	@Test
 	void givenALot_CheckIfItIsFull_ReturnSign() {
@@ -92,7 +92,7 @@ class ParkingLotTest {
                 assertEquals("full", airportSecurity.getStatus());
 		System.out.println();
 		}
-@Test
+        @Test
 	void givenALot_CheckIfItHasSpace_ReturnIfFullSignCanBeTaken() {
 		System.out.println("Test Notify Observers");
 		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
@@ -107,7 +107,7 @@ class ParkingLotTest {
 		System.out.println();
 
 }
-@Test
+        @Test
 	void givenALot_ParkingAttendantToParkCars_ReturnMakeDecisionForParking() {
 		System.out.println("Test Park Car by Attendant");
 		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
@@ -120,12 +120,23 @@ class ParkingLotTest {
 		assertEquals(3, parkingLot.getParkedCars().size());
 		System.out.println();
 	}
-@Test
+        @Test
 	void givenALot_FindCar_ReturnDriverGoingHome() {
 		System.out.println("Test Find Car");
 
 		Car foundCar = parkingLot.findCar("MH-12-1234");
 		assertNotNull(foundCar);
 		assertEquals("BMW", foundCar.getBrand());
+	}
+        @Test
+	void givenALot_CalculateTime_ReturnCharge() {
+		System.out.println("Test Charge Parking");
+
+		parkingLot.parkCar(car2);
+		parkingLot.unparkCar("WB-12-1235");
+
+		assertEquals(20, manager.chargeParking(car2));
+		System.out.println();
+
 	}
 }

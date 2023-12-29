@@ -1,4 +1,4 @@
-package com.bridgelabz.observers;
+package com.bridgelabz;
 
 public class AirportSecurity implements ParkingObservers {
 

@@ -90,7 +90,23 @@ public class ParkingLot {
 		}
 		System.out.println("Car with license plate " + licensePlate + " not found in the parking lot.");
 	}
-
+        
+	/*
+	 * @Description - Finds the car with the given license plate
+	 *
+	 * @param - licensePlate - license plate of the car to be found
+	 *
+	 * @return - Car object if found, null otherwise
+	 */
+	public Car findCar(String licensePlate) {
+		for (Car car : parkedCars) {
+			if (car.getLicensePlate().equals(licensePlate)) {
+				System.out.println("Car with license plate " + licensePlate + " found in the parking lot.");
+				return car;
+			}
+		}
+		return null;
+	}
 	/*
 	 * @Description - adds observers to the list of observers
 	 * 

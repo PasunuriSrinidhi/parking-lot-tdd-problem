@@ -1,4 +1,5 @@
 package com.bridgelabz;
+import com.bridgelabz.model.Car;
 
 /*
  * @Description -Notify the manager about parking lot status
@@ -7,8 +8,7 @@ package com.bridgelabz;
  * 
  */
 public class ParkingOwner implements ParkingObservers {
-
-	@Override
+        @Override
 
 	/*
 	 * @Description - Update the owner about parking lot status
@@ -26,6 +26,25 @@ public class ParkingOwner implements ParkingObservers {
 			return "not full";
 
 		}
+	}
+
+/*
+	 * @Description - returns the charge for parking
+	 * 
+	 * @param - Car object
+	 * 
+	 * @return - charge for parking
+	 */
+	public double chargeParking(Car car) {
+		double charge = 0;
+		int time = car.getUnparkTime().getHour() - (car.getParkTime().getHour());
+		System.out.println("Parking Time: " + car.getParkTime()+ " " + car.getUnparkTime());
+		if (time <= 1) {
+			charge = 20;
+		} else {
+			charge = 20 + (time - 1) * 10;
+		}
+		return charge;
 	}
 
 }

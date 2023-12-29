@@ -81,7 +81,7 @@ class ParkingLotTest {
 		parkingLot.parkCar(car3);
 		parkingLot.parkCar(car4);
 
-		assertEquals("full", manager.getStatus());
+		assertEquals("full", owner.getStatus());
 		System.out.println();
 		
 	}

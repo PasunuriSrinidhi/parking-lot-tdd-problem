@@ -1,15 +1,12 @@
 package com.bridgelabz
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import com.bridgelabz.Car;
 import com.bridgelabz.ParkingLot;
 import com.bridgelabz.ParkingOwner;
 import com.bridgelabz.ParkingObservers;
 import com.bridgelabz.AirportSecurity;
-
 
 class ParkingLotTest {
 	ParkingLot parkingLot;
@@ -57,8 +54,7 @@ class ParkingLotTest {
 		System.out.println("Test Park Cars");
 		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
 		Car car4 = new Car("MH-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver");
-
-		parkingLot.parkCar(car3);
+                parkingLot.parkCar(car3);
 		parkingLot.parkCar(car4);
 		assertEquals(3, parkingLot.getParkedCars().size());
 		System.out.println();
@@ -68,8 +64,7 @@ class ParkingLotTest {
 	void givenACar_RemoveFromParkingLot_ReturnHome() {
 		System.out.println("Test Unpark Cars");
 		parkingLot.unparkCar("MH-12-1234");
-
-		assertFalse(parkingLot.getParkedCars().contains(car1));
+                assertFalse(parkingLot.getParkedCars().contains(car1));
 		assertTrue(parkingLot.getParkedCars().contains(car2));
 		System.out.println();
 }
@@ -79,11 +74,9 @@ class ParkingLotTest {
 		System.out.println("Test Notify Observers");
 		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
 		Car car4 = new Car("MH-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver");
-
 		parkingLot.parkCar(car3);
 		parkingLot.parkCar(car4);
-
-		assertEquals("full", owner.getStatus());
+                assertEquals("full", owner.getStatus());
 		System.out.println();
 		
 	}
@@ -92,13 +85,24 @@ class ParkingLotTest {
 		System.out.println("Test Airport Security");
 		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
 		Car car4 = new Car("MH-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver");
+		parkingLot.parkCar(car3);
+		parkingLot.parkCar(car4);
+                assertEquals("full", airportSecurity.getStatus());
+		System.out.println();
+		}
+@Test
+	void givenALot_CheckIfItHasSpace_ReturnIfFullSignCanBeTaken() {
+		System.out.println("Test Notify Observers");
+		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
+		Car car4 = new Car("MH-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver");
 
 		parkingLot.parkCar(car3);
 		parkingLot.parkCar(car4);
 
-		assertEquals("full", airportSecurity.getStatus());
+		assertEquals("full", owner.update(parkingLot.isFull()));
+		assertEquals("full", airportSecurity.update(parkingLot.isFull()));
 
 		System.out.println();
-		
+
 	}
 }

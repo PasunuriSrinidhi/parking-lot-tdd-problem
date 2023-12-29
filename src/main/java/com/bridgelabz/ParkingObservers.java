@@ -1,4 +1,4 @@
-package com.bridgelabz.observers;
+package com.bridgelabz;
 
 /*
  * @Description -Notify the observers about parking lot status
@@ -6,7 +6,5 @@ package com.bridgelabz.observers;
  * @Methods - update() - notifies the observers about parking lot status
  */
 public interface ParkingObservers {
-	void update();
-
-	String getStatus();
+	String update( boolean isFull);
 }

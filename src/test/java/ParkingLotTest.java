@@ -7,6 +7,7 @@ import com.bridgelabz.ParkingLot;
 import com.bridgelabz.ParkingOwner;
 import com.bridgelabz.ParkingObservers;
 import com.bridgelabz.AirportSecurity;
+import com.bridgelabz.ParkingAttendant;
 
 class ParkingLotTest {
 	ParkingLot parkingLot;
@@ -28,6 +29,7 @@ class ParkingLotTest {
 	void setUp() throws Exception {
 	        parkingLot = new ParkingLot(3);// Create a parking lot with capacity 3
 		owner= new ParkingOwner();// Create a parking owner
+		airportSecurity = new AirportSecurity();
 		parkingLot.addObservers(owner);// Add the owner to the list of observers
                 parkingLot.addObservers(airportSecurity);// Add the airport security to the list of observers
 		// Create two cars
@@ -104,5 +106,18 @@ class ParkingLotTest {
 
 		System.out.println();
 
+}
+@Test
+	void givenALot_ParkingAttendantToParkCars_ReturnMakeDecisionForParking() {
+		System.out.println("Test Park Car by Attendant");
+		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
+		Car car4 = new Car("MH-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver");
+		ParkingAttendant attendant = new ParkingAttendant();
+
+		attendant.parkCar(parkingLot, car3);
+		attendant.parkCar(parkingLot, car4);
+
+		assertEquals(3, parkingLot.getParkedCars().size());
+		System.out.println();
 	}
 }

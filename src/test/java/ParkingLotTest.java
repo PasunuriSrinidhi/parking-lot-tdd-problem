@@ -120,4 +120,12 @@ class ParkingLotTest {
 		assertEquals(3, parkingLot.getParkedCars().size());
 		System.out.println();
 	}
+@Test
+	void givenALot_FindCar_ReturnDriverGoingHome() {
+		System.out.println("Test Find Car");
+
+		Car foundCar = parkingLot.findCar("MH-12-1234");
+		assertNotNull(foundCar);
+		assertEquals("BMW", foundCar.getBrand());
+	}
 }

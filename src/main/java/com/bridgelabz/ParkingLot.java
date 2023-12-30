@@ -31,6 +31,7 @@ public class ParkingLot {
 	private List<Car> parkedCars = new ArrayList<>();
 	private List<ParkingObservers> observers = new ArrayList<>();
 	int capacity;
+	int occupiedSpots;
 
 	/*
 	 * @Description - Constructor to initialize the capacity of the parking lot
@@ -41,6 +42,7 @@ public class ParkingLot {
 	 */
 	public ParkingLot(int capacity) {
 		this.capacity = capacity;
+		this.occupiedSpots = 0;
 	}
 
 	/*
@@ -61,12 +63,21 @@ public class ParkingLot {
 	 * 
 	 * @return - none
 	 */
+
+	public boolean hasAvailableSpot() {
+                return occupiedSpots < capacity;
+    }
 	public void parkCar(Car car) {
 		if (!isFull()) {
 			parkedCars.add(car);
 			car.setParktime(LocalTime.now());
 			System.out.println(car.getLicensePlate() + " has been parked.");
-		} else {
+		} 
+	      else if (hasAvailableSpot()) {
+                        occupiedSpots++;
+                        System.out.println("Car parked successfully.");
+        }
+		else {
 
 			System.out.println("Parking lot is full. Cannot park " + car.getLicensePlate() + ".");
 			notifyObservers(isFull());

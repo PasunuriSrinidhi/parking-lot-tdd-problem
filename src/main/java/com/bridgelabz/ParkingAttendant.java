@@ -17,6 +17,20 @@ public class ParkingAttendant {
         System.out.println("All parking lots are full. Unable to park car.");
     }
 
+   public void directCarToNearestSpot() {
+        ParkingLot nearestLot = parkingLots.stream()
+                .filter(ParkingLot::hasAvailableSpot)
+                .min(Comparator.comparingInt(ParkingLot::getFreeSpots))
+                .orElse(null);
+
+        if (nearestLot != null) {
+            nearestLot.parkCar();
+            System.out.println("Car parked in the nearest available spot.");
+        } else {
+            System.out.println("All parking lots are full. Unable to park car.");
+        }
+    }
+
 	/*
 	 * @Description - parks the car in the parking lot
 	 * 
@@ -29,5 +43,6 @@ public class ParkingAttendant {
 		parklot.parkCar(car,driver);
 
 	}
+	Parking cars for handicapped in nearest space
 
 }

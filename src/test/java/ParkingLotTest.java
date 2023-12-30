@@ -1,8 +1,9 @@
-package com.bridgelabz
+package com.bridgelabz.parkinglottest;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.bridgelabz.Car;
+import com.bridgelabz.Driver;
 import com.bridgelabz.ParkingLot;
 import com.bridgelabz.ParkingOwner;
 import com.bridgelabz.ParkingObservers;
@@ -158,6 +159,27 @@ class ParkingLotTest {
         // Check if each parking lot has an even distribution
         assertTrue(Math.abs(lot1.getOccupiedSpots() - lot2.getOccupiedSpots()) <= 1,
                 "Parking lots do not have an even distribution");
+    }
+
+    @Test
+    void givenALot_AttendantToParkCar_ReturnParkInNearestFreeSpace() {
+        // Create parking lots
+        ParkingLot lot1 = new ParkingLot(5);
+        ParkingLot lot2 = new ParkingLot(5);
+
+        // Create a list of parking lots
+        ParkingAttendant parkingAttendant = new ParkingAttendant(lot1, lot2);
+
+        // Park 5 cars in lot1
+        for (int i = 0; i < 5; i++) {
+            parkingAttendant.directCarToNearestSpot();
+        }
+
+        // Create a handicap driver and park their car
+        parkingAttendant.directCarToNearestSpot();
+
+        // Ensure the handicap driver's car is parked in the lot with the nearest available spot
+        assertEquals(1, lot2.getOccupiedSpots(), "Handicap driver's car should be parked in the nearest available spot.");
     }
 
 }

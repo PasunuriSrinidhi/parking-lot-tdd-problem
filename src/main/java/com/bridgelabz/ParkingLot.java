@@ -11,7 +11,7 @@ import com.bridgelabz.ParkingObservers;
  * @Description - ParkingLot class to park and unpark cars and notify observers about parking lot status
  * 
  * @Properties - capacity - capacity of the parking lot
- * 				parkedCars - list of cars parked in the parking lot
+ * 				parkedCars - list of cars parked in the lot
  * 				observers - list of observers
  * 
  * @Methods - isFull() - checks if the parking lot is full
@@ -66,23 +66,39 @@ public class ParkingLot {
 
 	public boolean hasAvailableSpot() {
                 return occupiedSpots < capacity;
-    }
-	public void parkCar(Car car) {
+        }
+	
+	public void parkCar(Car car,Driver driver) {
 		if (!isFull()) {
-			parkedCars.add(car);
 			car.setParktime(LocalTime.now());
-			System.out.println(car.getLicensePlate() + " has been parked.");
+			if (driver.equals(Driver.Handicapped)) {
+				if (parkedCars.size()!=0) {
+					Car car_zero = parkedCars.get(0);
+					parkedCars.remove(0);
+					parkedCars.add(0, car);
+					parkedCars.add(car_zero);
+				}
+				else
+					parkedCars.add(car);
+				System.out.println(car.getLicensePlate() + " has been parked.");
+				notifyObservers(isFull());
+			} else {
+				parkedCars.add(car);
+				System.out.println(car.getLicensePlate() + " has been parked.");
+				notifyObservers(isFull());
+			}
 		} 
-	      else if (hasAvailableSpot()) {
+	               else if (hasAvailableSpot()) {
                         occupiedSpots++;
                         System.out.println("Car parked successfully.");
         }
-		else {
-
-			System.out.println("Parking lot is full. Cannot park " + car.getLicensePlate() + ".");
-			notifyObservers(isFull());
+		
+		      else {
+			System.out.println("Parking lot is full.");
 		}
 	}
+		
+	      
 
 	/*
 	 * @Description - unparks the car from the parking lot

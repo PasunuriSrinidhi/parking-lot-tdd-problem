@@ -181,4 +181,14 @@ public class ParkingLot {
 			System.out.println(car.getLicensePlate());
 		}
 	}
+	public void directCar() {
+        for (ParkingLot parkingLot : parkingLots) {
+            if (parkingLot.hasAvailableSpot()) {
+                parkingLot.parkCar();
+                return;
+            }
+        }
+        System.out.println("All parking lots are full. Unable to park car.");
+    }
+
 }

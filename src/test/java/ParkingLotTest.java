@@ -8,6 +8,7 @@ import com.bridgelabz.ParkingOwner;
 import com.bridgelabz.ParkingObservers;
 import com.bridgelabz.AirportSecurity;
 import com.bridgelabz.ParkingAttendant;
+import com.bridgelabz.CarParkingSystem;
 
 class ParkingLotTest {
 	ParkingLot parkingLot;
@@ -139,4 +140,24 @@ class ParkingLotTest {
 		System.out.println();
 
 	}
+     @Test
+    void givenALot_DirectCars_ReturnEvenDistribution() {
+	    System.out.println("Test even distribution");
+        // Create parking lots
+        ParkingLot lot1 = new ParkingLot(5);
+        ParkingLot lot2 = new ParkingLot(5);
+
+        // Create a list of parking lots
+        ParkingAttendant parkingAttendant = new ParkingAttendant(lot1, lot2);
+
+        // Park 10 cars (5 in each lot)
+        for (int i = 0; i < 10; i++) {
+            parkingAttendant.directCar();
+        }
+
+        // Check if each parking lot has an even distribution
+        assertTrue(Math.abs(lot1.getOccupiedSpots() - lot2.getOccupiedSpots()) <= 1,
+                "Parking lots do not have an even distribution");
+    }
+
 }

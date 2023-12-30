@@ -11,7 +11,7 @@ import com.bridgelabz.ParkingObservers;
  * @Description - ParkingLot class to park and unpark cars and notify observers about parking lot status
  * 
  * @Properties - capacity - capacity of the parking lot
- * 				parkedCars - list of cars parked in the parking lot
+ * 				parkedCars - list of cars parked in the lot
  * 				observers - list of observers
  * 
  * @Methods - isFull() - checks if the parking lot is full

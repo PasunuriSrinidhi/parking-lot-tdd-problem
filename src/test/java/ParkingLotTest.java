@@ -8,6 +8,7 @@ import com.bridgelabz.ParkingOwner;
 import com.bridgelabz.ParkingObservers;
 import com.bridgelabz.AirportSecurity;
 import com.bridgelabz.ParkingAttendant;
+import com.bridgelabz.CarParkingSystem;
 
 class ParkingLotTest {
 	ParkingLot parkingLot;

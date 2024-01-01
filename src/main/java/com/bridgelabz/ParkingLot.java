@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+import com.bridgelabz.Driver;
 import com.bridgelabz.ParkingObservers;
 
 /*
@@ -43,6 +43,13 @@ public class ParkingLot {
 	public ParkingLot(int capacity) {
 		this.capacity = capacity;
 		this.occupiedSpots = 0;
+	}
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
 	}
 
 	/*
@@ -139,6 +146,15 @@ public class ParkingLot {
 			}
 		}
 		return null;
+	}
+	public List<String> getLocationOfParkedWhiteCars() {
+		List<String> locations = new ArrayList<>();
+		for (Car car : parkedCars) {
+			if (car.getColor().equalsIgnoreCase("White")) {
+				locations.add("Parking Lot " + hashCode());
+			}
+		}
+		return locations;
 	}
 	/*
 	 * @Description - adds observers to the list of observers

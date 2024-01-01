@@ -36,13 +36,8 @@ class ParkingAttendantTest {
 		policeDepartment = new PoliceDepartment(parkingAttendant);
 	}
 
-	/*
-	 * @Description - tests the large car parking method
-	 * 
-	 * @param - none
-	 * 
-	 * @return - none
-	 */
+	//tests the large car parking method
+	 
 	@Test
 	void givenALot_DirectLargeCars_ReturnHighestFreeSpace() {
 		System.out.println("Test Direct Large Car");
@@ -55,15 +50,10 @@ class ParkingAttendantTest {
 		System.out.println();
 	}
 
-	/*
-	 * @Description - tests the location of parked cars by color method
-	 * 
-	 * @param - none
-	 * 
-	 * @return - none
-	 */
+	//tests the location of parked cars by color method
+	 
 	@Test
-	void givenALot_DirectLargeCars_ReturnHighestFreeSpace() {
+	void givenALot_PoliceWantsWhiteCarsLocation_ReturnInvestigateOfBombThreat() {
 		System.out.println("Test Get Location of Parked White Cars");
 		Car whiteCar1 = new Car("WB-12-1234", "Toyota", "White", CarType.SMALL);
 		Car whiteCar2 = new Car("WB-12-5678", "Honda", "White", CarType.LARGE);
@@ -81,13 +71,8 @@ class ParkingAttendantTest {
 		System.out.println();
 	}
 
-	/*
-	 * @Description - tests the location of parked cars by color and brand method
-	 * 
-	 * @param - none
-	 * 
-	 * @return - none
-	 */
+	//tests the location of parked cars by color and brand method
+	 
 	@Test
 	void givenALot_GetLocationOfParkedBlueToyotaCars_ReturnInvestigateOfRobberyCase() {
 		System.out.println("Test Get Location of Parked Blue Toyota Cars");

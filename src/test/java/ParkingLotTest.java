@@ -181,5 +181,42 @@ class ParkingLotTest {
         // Ensure the handicap driver's car is parked in the lot with the nearest available spot
         assertEquals(1, lot2.getOccupiedSpots(), "Handicap driver's car should be parked in the nearest available spot.");
     }
+	
 
+    @Test
+    public void givenALot_PoliceWantsWhiteCarsLocation_ReturnInvestigateOfBombThreat() {
+        // Create a ParkingAttendant instance
+        ParkingAttendant parkingAttendant = new ParkingAttendant();
+
+        // Create some sample data for testing
+        List<String> locations = new ArrayList<>();
+        locations.add("Parking Lot 123");
+        locations.add("Parking Lot 456");
+
+        // Set the sample data in the ParkingAttendant
+        parkingAttendant.setParkedCars(createCars());
+
+        // Create PoliceDepartment instance with the ParkingAttendant
+        PoliceDepartment policeDepartment = new PoliceDepartment(parkingAttendant);
+
+        // Call the method to be tested
+        List<String> actualLocations = policeDepartment.getLocationOfParkedWhiteCars();
+
+        // Verify the result
+        assertEquals(locations, actualLocations);
+    }
+
+    // Helper method to create cars with white color
+    private List<Car> createCars() {
+        List<Car> cars = new ArrayList<>();
+        cars.add(new Car("White"));
+        cars.add(new Car("Red"));
+        cars.add(new Car("White"));
+        cars.add(new Car("Blue"));
+        return cars;
+    }
 }
+
+
+
+

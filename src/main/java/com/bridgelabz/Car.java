@@ -1,5 +1,6 @@
 package com.bridgelabz;
 import java.time.LocalTime;
+
 public class Car {
 
 	private String licensePlate;

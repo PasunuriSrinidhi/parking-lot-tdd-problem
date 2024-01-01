@@ -56,6 +56,10 @@ public class ParkingLot {
 		return parkedCars.size() == capacity;
 	}
 
+	public boolean hasAvailableSpot() {
+                return occupiedSpots < capacity;
+        }
+
 	/*
 	 * @Description - parks the car in the parking lot
 	 * 
@@ -64,9 +68,7 @@ public class ParkingLot {
 	 * @return - none
 	 */
 
-	public boolean hasAvailableSpot() {
-                return occupiedSpots < capacity;
-        }
+	
 	
 	public void parkCar(Car car,Driver driver) {
 		if (!isFull()) {
@@ -182,6 +184,17 @@ public class ParkingLot {
 	public List<Car> getParkedCars() {
 		return parkedCars;
 	}
+
+	/*
+     * @Description - Returns the number of free spaces in the parking lot.
+     * 
+     * @param - none
+     * 
+     * @return - the number of free spaces
+     */
+    public int getFreeSpaces() {
+        return capacity - parkedCars.size();
+    }
 
 	/*
 	 * @Description - prints the list of parked cars

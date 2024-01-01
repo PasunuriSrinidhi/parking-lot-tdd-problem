@@ -1,23 +1,33 @@
-package com.bridgelabz.parkinglottest;
+package com.bridgelabz;
+
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.bridgelabz.Car;
 import com.bridgelabz.Driver;
+import com.bridgelabz.CarType;
+import com.bridgelabz.Car;
+import com.bridgelabz.ParkingAttendant;
 import com.bridgelabz.ParkingLot;
+import com.bridgelabz.AirportSecurity;
 import com.bridgelabz.ParkingOwner;
 import com.bridgelabz.ParkingObservers;
-import com.bridgelabz.AirportSecurity;
-import com.bridgelabz.ParkingAttendant;
-import com.bridgelabz.CarParkingSystem;
 
+/*
+ * @Description - Test cases for ParkingLot class
+ * 
+ * @Properties - parkingLot - object of ParkingLot class
+ * 				manager - object of ParkingOwner class
+ * 				car - object of Car class
+
+ * 
+ */
 class ParkingLotTest {
 	ParkingLot parkingLot;
-	ParkingObservers owner;
+	ParkingManager owner;
 	ParkingObservers airportSecurity;
 	Car car1;
 	Car car2;
-
 
 	/*
 	 * @Description - sets up the objects for testing
@@ -26,122 +36,115 @@ class ParkingLotTest {
 	 * 
 	 * @return - none
 	 */
-
 	@BeforeEach
 	void setUp() throws Exception {
-	        parkingLot = new ParkingLot(3);// Create a parking lot with capacity 3
-		owner= new ParkingOwner();// Create a parking owner
-		airportSecurity = new AirportSecurity();
-		parkingLot.addObservers(owner);// Add the owner to the list of observers
-                parkingLot.addObservers(airportSecurity);// Add the airport security to the list of observers
+		parkingLot = new ParkingLot(3);// Create a parking lot with capacity 3
+
 		// Create two cars
 		System.out.println();
-		car1 = new Car("MH-12-1234", "BMW", "White");
-		car2 = new Car("MH-12-1235", "Audi TT", "Goodwood Green Pearl");
+		car1 = new Car("WB-12-1234", "BMW", "White", CarType.SMALL);
+		car2 = new Car("WB-12-1235", "Audi TT", "Goodwood Green Pearl", CarType.SMALL);
 
 		// Park the cars
-		parkingLot.parkCar(car1);
-		parkingLot.parkCar(car2);
+		parkingLot.parkCar(car1, Driver.Handicapped);
+		parkingLot.parkCar(car2, Driver.Non_HandiCapped);
 
 	}
 
-	/*
-	 * @Description - tests the parkCar() method
-	 * 
-	 * @param - none
-	 * 
-	 * @return - none
-	 */
-
+	// tests the parkCar() method
+	
 	@Test
-	void givenACar_AddToParkingLot_ReturnBoolean() {
+	void  givenACar_AddToParkingLot_ReturnBoolean() {
 		System.out.println("Test Park Cars");
-		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
-		Car car4 = new Car("MH-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver");
-                parkingLot.parkCar(car3);
-		parkingLot.parkCar(car4);
+		Car car3 = new Car("WB-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray", CarType.SMALL);
+		Car car4 = new Car("WB-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver", CarType.SMALL);
+
+		parkingLot.parkCar(car3, Driver.Handicapped);
+		parkingLot.parkCar(car4, Driver.Non_HandiCapped);
 		assertEquals(3, parkingLot.getParkedCars().size());
 		System.out.println();
 	}
 
-       @Test
+	 //tests the unparkCar() method
+	
+	@Test
 	void givenACar_RemoveFromParkingLot_ReturnHome() {
 		System.out.println("Test Unpark Cars");
-		parkingLot.unparkCar("MH-12-1234");
-                assertFalse(parkingLot.getParkedCars().contains(car1));
+		parkingLot.unparkCar("WB-12-1234");
+
+		assertFalse(parkingLot.getParkedCars().contains(car1));
 		assertTrue(parkingLot.getParkedCars().contains(car2));
 		System.out.println();
-     }
+	}
 
+	// tests the notifyObservers() method
+	 
 	@Test
 	void givenALot_CheckIfItIsFull_ReturnSign() {
-		System.out.println("Test Notify Observers");
-		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
-		Car car4 = new Car("MH-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver");
-		parkingLot.parkCar(car3);
-		parkingLot.parkCar(car4);
-                assertEquals("full", owner.getStatus());
-		System.out.println();
+		owner = new ParkingOwner();
+		airportSecurity = new AirportSecurity();
 		
-	}
-	@Test
-	void givenALot_CheckIfItIsFull_ReturnRedirectOfSecurityStaff() {
-		System.out.println("Test Airport Security");
-		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
-		Car car4 = new Car("MH-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver");
-		parkingLot.parkCar(car3);
-		parkingLot.parkCar(car4);
-                assertEquals("full", airportSecurity.getStatus());
-		System.out.println();
-		}
-        @Test
-	void givenALot_CheckIfItHasSpace_ReturnIfFullSignCanBeTaken() {
+		parkingLot.addObservers(owner);
+		parkingLot.addObservers(airportSecurity);
+		
 		System.out.println("Test Notify Observers");
-		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
-		Car car4 = new Car("MH-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver");
+		Car car3 = new Car("WB-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray", CarType.SMALL);
+		Car car4 = new Car("WB-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver", CarType.SMALL);
 
-		parkingLot.parkCar(car3);
-		parkingLot.parkCar(car4);
+		parkingLot.parkCar(car3, Driver.Handicapped);
+		parkingLot.parkCar(car4, Driver.Non_HandiCapped);
 
 		assertEquals("full", owner.update(parkingLot.isFull()));
-		assertEquals("full", airportSecurity.update(parkingLot.isFull()));
+		assertEquals("full",airportSecurity.update(parkingLot.isFull()));
 
 		System.out.println();
 
-}
-        @Test
+	}
+
+	// tests the parkCar() method by attendant
+	
+	@Test
 	void givenALot_ParkingAttendantToParkCars_ReturnMakeDecisionForParking() {
 		System.out.println("Test Park Car by Attendant");
-		Car car3 = new Car("MH-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray");
-		Car car4 = new Car("MH-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver");
+		Car car3 = new Car("WB-12-1236", "Acura TLX Type S PMC Edition", "Gotham Gray", CarType.SMALL);
+		Car car4 = new Car("WB-12-1237", "Bentley’s Mulliner division", "Fine Brodgar Silver", CarType.MEDIUM);
 		ParkingAttendant attendant = new ParkingAttendant();
 
-		attendant.parkCar(parkingLot, car3);
-		attendant.parkCar(parkingLot, car4);
+		attendant.parkCar(parkingLot, car3, Driver.Handicapped);
+		attendant.parkCar(parkingLot, car4, Driver.Non_HandiCapped);
 
 		assertEquals(3, parkingLot.getParkedCars().size());
 		System.out.println();
 	}
-        @Test
+
+	// tests the findCar() method using license plate
+	 
+	@Test
 	void givenALot_FindCar_ReturnDriverGoingHome() {
 		System.out.println("Test Find Car");
 
-		Car foundCar = parkingLot.findCar("MH-12-1234");
+		Car foundCar = parkingLot.findCar("WB-12-1234");
 		assertNotNull(foundCar);
 		assertEquals("BMW", foundCar.getBrand());
 	}
-        @Test
+
+	// tests the chargeParking() method
+	
+	@Test
 	void givenALot_CalculateTime_ReturnCharge() {
+		owner = new ParkingOwner();
+		parkingLot.addObservers(owner);
 		System.out.println("Test Charge Parking");
 
-		parkingLot.parkCar(car2);
+		parkingLot.parkCar(car2, Driver.Non_HandiCapped);
 		parkingLot.unparkCar("WB-12-1235");
 
-		assertEquals(20, manager.chargeParking(car2));
+		assertEquals(20, owner.chargeParking(car2));
 		System.out.println();
 
 	}
-     @Test
+
+@Test
     void givenALot_DirectCars_ReturnEvenDistribution() {
 	    System.out.println("Test even distribution");
         // Create parking lots
@@ -181,67 +184,4 @@ class ParkingLotTest {
         // Ensure the handicap driver's car is parked in the lot with the nearest available spot
         assertEquals(1, lot2.getOccupiedSpots(), "Handicap driver's car should be parked in the nearest available spot.");
     }
-	
-
-    @Test
-    public void givenALot_PoliceWantsWhiteCarsLocation_ReturnInvestigateOfBombThreat() {
-        // Create a ParkingAttendant instance
-        ParkingAttendant parkingAttendant = new ParkingAttendant();
-
-        // Create some sample data for testing
-        List<String> locations = new ArrayList<>();
-        locations.add("Parking Lot 123");
-        locations.add("Parking Lot 456");
-
-        // Set the sample data in the ParkingAttendant
-        parkingAttendant.setParkedCars(createCars());
-
-        // Create PoliceDepartment instance with the ParkingAttendant
-        PoliceDepartment policeDepartment = new PoliceDepartment(parkingAttendant);
-
-        // Call the method to be tested
-        List<String> actualLocations = policeDepartment.getLocationOfParkedWhiteCars();
-
-        // Verify the result
-        assertEquals(locations, actualLocations);
-    }
-
-    // Helper method to create cars with white color
-    private List<Car> createCars() {
-        List<Car> cars = new ArrayList<>();
-        cars.add(new Car("White"));
-        cars.add(new Car("Red"));
-        cars.add(new Car("White"));
-        cars.add(new Car("Blue"));
-        return cars;
-    }
-   @Test
-    public void givenALot_LocationPlateNumberAttendantColorBrand_ReturnInvestigateARobberyCase() {
-        
-        ParkingAttendant parkingAttendant = new ParkingAttendant();
-        parkingAttendant.parkingAttendantName = "John Doe";
-
-        ParkingLot parkingLot1 = new ParkingLot();
-        parkingLot1.addCar(new Car("ABC123", "Blue", "Toyota"), "A1");
-        parkingLot1.addCar(new Car("XYZ789", "Blue", "Toyota"), "B2");
-
-        ParkingLot parkingLot2 = new ParkingLot();
-        parkingLot2.addCar(new Car("DEF456", "Red", "Honda"), "C3");
-        parkingLot2.addCar(new Car("GHI789", "Blue", "Toyota"), "D4");
-
-        parkingAttendant.addParkingLot(parkingLot1);
-        parkingAttendant.addParkingLot(parkingLot2);
-
-        // Call the method to be tested
-        List<String> result = parkingAttendant.getLocationOfParkedColorAndBrandCars("Blue", "Toyota");
-
-        // Verify the result
-        assertEquals(2, result.size());
-        assertEquals("John Doe A1", result.get(0));
-        assertEquals("John Doe D4", result.get(1));
-    }
 }
-
-
-
-

@@ -1,4 +1,4 @@
-package com.bridgelabz.parkinglottest;
+package com.bridgelabz;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,7 +27,7 @@ class ParkingAttendantTest {
 	}
 
 	@Test
-	void test() {
+	void givenALot_AttendantToDirectCarsToHighestFreeSpace_ReturnManoeuvreLargeCars() {
         System.out.println("Test Direct Large Car");
         Car largeCar = new Car("WB-12-1238", "Mercedes-Benz GLS", "Black",CarType.LARGE);
 
@@ -40,3 +40,4 @@ class ParkingAttendantTest {
 	}
 
 }
+

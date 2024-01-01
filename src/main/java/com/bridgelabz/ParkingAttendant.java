@@ -43,6 +43,6 @@ public class ParkingAttendant {
 		parklot.parkCar(car,driver);
 
 	}
-	Parking cars for handicapped in nearest space
+	
 
 }

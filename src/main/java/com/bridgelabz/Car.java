@@ -7,11 +7,13 @@ public class Car {
 	private String color;
 	private LocalTime parktime;
 	private LocalTime unparktime;
+	private CarType size;
 
-	public Car(String licensePlate, String brand, String color) {
+	public Car(String licensePlate, String brand, String color,CarType size) {
 		this.licensePlate = licensePlate;
 		this.brand = brand;
 		this.color = color;
+		this.size= size;
 	}
 
 	public String getLicensePlate() {
@@ -54,4 +56,11 @@ public class Car {
 		this.color = color;
 	}
 
+       public CarType getSize() {
+		return size;
+	}
+
+	public void setSize(CarType size) {
+		this.size = size;
+	}
 }

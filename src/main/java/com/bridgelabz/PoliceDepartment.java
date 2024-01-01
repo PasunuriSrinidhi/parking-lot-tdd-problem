@@ -1,5 +1,5 @@
-package com.bridgelabz.model;
-
+package com.bridgelabz;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PoliceDepartment {
@@ -9,8 +9,19 @@ public class PoliceDepartment {
 		this.parkingAttendant = parkingAttendant;
 	}
 
-	public List<String> getLocationOfParkedWhiteCars() {
-		return parkingAttendant.getLocationOfParkedWhiteCars();
+	public List<String> getLocationOfParkedColorCars(String color) {
+		return parkingAttendant.getLocationOfParkedCarsbyColor(color);
+	}
+
+	public List<String> getLocationOfParkedColorAndBrandCars(String color, String brand) {
+		List<String> result = new ArrayList<>();
+		List<String> locations = parkingAttendant.getLocationOfParkedCarsbyBrandaColor(color, brand);
+		String name= parkingAttendant.parkingAttendantName;
+		for (String location : locations) {
+			result.add(name + " " + location);
+		}
+		return result;
+
 	}
 
 }

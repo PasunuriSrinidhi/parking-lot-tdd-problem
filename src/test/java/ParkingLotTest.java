@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.bridgelabz.Car;
+import com.bridgelabz.CarType;
 import com.bridgelabz.Driver;
 import com.bridgelabz.ParkingLot;
 import com.bridgelabz.ParkingOwner;
@@ -12,7 +13,10 @@ import com.bridgelabz.ParkingAttendant;
 import com.bridgelabz.CarParkingSystem;
 
 class ParkingLotTest {
-	ParkingLot parkingLot;
+	PoliceDepartment policeDepartment;
+	ParkingLot parkingLot1;
+	ParkingLot parkingLot2;
+	ParkingAttendant parkingAttendant;
 	ParkingObservers owner;
 	ParkingObservers airportSecurity;
 	Car car1;
@@ -29,20 +33,29 @@ class ParkingLotTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-	        parkingLot = new ParkingLot(3);// Create a parking lot with capacity 3
-		owner= new ParkingOwner();// Create a parking owner
-		airportSecurity = new AirportSecurity();
-		parkingLot.addObservers(owner);// Add the owner to the list of observers
-                parkingLot.addObservers(airportSecurity);// Add the airport security to the list of observers
-		// Create two cars
+		parkingLot1 = new ParkingLot(5);
+		parkingLot2 = new ParkingLot(3);
+
+		parkingAttendant = new ParkingAttendant(List.of(parkingLot1, parkingLot2), "Grayson");
+		policeDepartment = new PoliceDepartment(parkingAttendant);
+	}
+        /*
+	 * @Description - tests the large car parking method
+	 * 
+	 * @param - none
+	 * 
+	 * @return - none
+	 */
+	@Test
+	void givenALot_DirectLargeCars_ReturnHighestFreeSpace() {
+		System.out.println("Test Direct Large Car");
+		Car largeCar = new Car("WB-12-1238", "Mercedes-Benz GLS", "Black", CarType.LARGE);
+
+		parkingAttendant.directLargeCar(largeCar, Driver.Handicapped);
+
+		assertTrue(parkingLot1.getParkedCars().contains(largeCar) || parkingLot2.getParkedCars().contains(largeCar));
+
 		System.out.println();
-		car1 = new Car("MH-12-1234", "BMW", "White");
-		car2 = new Car("MH-12-1235", "Audi TT", "Goodwood Green Pearl");
-
-		// Park the cars
-		parkingLot.parkCar(car1);
-		parkingLot.parkCar(car2);
-
 	}
 
 	/*
@@ -185,63 +198,58 @@ class ParkingLotTest {
 
     @Test
     public void givenALot_PoliceWantsWhiteCarsLocation_ReturnInvestigateOfBombThreat() {
-        // Create a ParkingAttendant instance
-        ParkingAttendant parkingAttendant = new ParkingAttendant();
+       System.out.println("Test Get Location of Parked White Cars");
+		Car whiteCar1 = new Car("WB-12-1234", "Toyota", "White", CarType.SMALL);
+		Car whiteCar2 = new Car("WB-12-5678", "Honda", "White", CarType.LARGE);
 
-        // Create some sample data for testing
-        List<String> locations = new ArrayList<>();
-        locations.add("Parking Lot 123");
-        locations.add("Parking Lot 456");
+		parkingLot1.parkCar(whiteCar1, Driver.Handicapped);
+		parkingLot2.parkCar(whiteCar2, Driver.Non_HandiCapped);
 
-        // Set the sample data in the ParkingAttendant
-        parkingAttendant.setParkedCars(createCars());
+		List<String> locations = policeDepartment.getLocationOfParkedColorCars("White");
 
-        // Create PoliceDepartment instance with the ParkingAttendant
-        PoliceDepartment policeDepartment = new PoliceDepartment(parkingAttendant);
+		assertTrue(locations.contains("Parking Lot " + parkingLot1.hashCode()));
+		assertTrue(locations.contains("Parking Lot " + parkingLot2.hashCode()));
 
-        // Call the method to be tested
-        List<String> actualLocations = policeDepartment.getLocationOfParkedWhiteCars();
+		assertEquals(2, locations.size());
 
-        // Verify the result
-        assertEquals(locations, actualLocations);
-    }
+		System.out.println();
+	}
 
-    // Helper method to create cars with white color
-    private List<Car> createCars() {
-        List<Car> cars = new ArrayList<>();
-        cars.add(new Car("White"));
-        cars.add(new Car("Red"));
-        cars.add(new Car("White"));
-        cars.add(new Car("Blue"));
-        return cars;
-    }
-   @Test
-    public void givenALot_LocationPlateNumberAttendantColorBrand_ReturnInvestigateARobberyCase() {
-        
-        ParkingAttendant parkingAttendant = new ParkingAttendant();
-        parkingAttendant.parkingAttendantName = "John Doe";
+    
+  @Test
+	void givenALot_GetLocationOfParkedBlueToyotaCars_ReturnInvestigateOfRobberyCase() {
+		System.out.println("Test Get Location of Parked Blue Toyota Cars");
+		Car blueToyotaCar1 = new Car("WB-12-1234", "Toyota", "Blue", CarType.SMALL);
+		Car blueToyotaCar2 = new Car("WB-12-5678", "Toyota", "Blue", CarType.LARGE);
 
-        ParkingLot parkingLot1 = new ParkingLot();
-        parkingLot1.addCar(new Car("ABC123", "Blue", "Toyota"), "A1");
-        parkingLot1.addCar(new Car("XYZ789", "Blue", "Toyota"), "B2");
+		parkingLot1.parkCar(blueToyotaCar1, Driver.Handicapped);
+		parkingLot2.parkCar(blueToyotaCar2, Driver.Non_HandiCapped);
 
-        ParkingLot parkingLot2 = new ParkingLot();
-        parkingLot2.addCar(new Car("DEF456", "Red", "Honda"), "C3");
-        parkingLot2.addCar(new Car("GHI789", "Blue", "Toyota"), "D4");
+		List<String> locations = policeDepartment.getLocationOfParkedColorAndBrandCars("Blue", "Toyota");
 
-        parkingAttendant.addParkingLot(parkingLot1);
-        parkingAttendant.addParkingLot(parkingLot2);
+		assertTrue(locations.contains(parkingAttendant.parkingAttendantName + " Parking Lot " + parkingLot1.hashCode()));
+		assertTrue(locations.contains(parkingAttendant.parkingAttendantName + " Parking Lot " + parkingLot2.hashCode()));
 
-        // Call the method to be tested
-        List<String> result = parkingAttendant.getLocationOfParkedColorAndBrandCars("Blue", "Toyota");
+		assertEquals(2, locations.size());
 
-        // Verify the result
-        assertEquals(2, result.size());
-        assertEquals("John Doe A1", result.get(0));
-        assertEquals("John Doe D4", result.get(1));
-    }
+		System.out.println();
+	}
+
+	@Test
+	void givenALot_GetLocationOfBMW_ReturnSecurityIncrease) {
+		System.out.println("Test Get Location of Parked BMW Cars");
+
+		Car bmwCar1 = new Car("WB-12-1234", "BMW", "White", CarType.SMALL);
+		Car bmwCar2 = new Car("WB-12-5678", "BMW", "Blue", CarType.MEDIUM);
+
+		parkingLot1.parkCar(bmwCar1, Driver.Handicapped);
+		parkingLot2.parkCar(bmwCar2, Driver.Non_HandiCapped);
+
+		List<String> locations = policeDepartment.getLocationOfParkedBrandCars("BMW");
+
+		assertEquals(2, locations.size());
+		assertTrue(locations.contains("Parking Lot " + parkingLot1.hashCode() + ", License Plate: " + bmwCar1.getLicensePlate()));
+		assertTrue(locations.contains("Parking Lot " + parkingLot2.hashCode() + ", License Plate: " + bmwCar2.getLicensePlate()));
+
+	}
 }
-
-
-
-

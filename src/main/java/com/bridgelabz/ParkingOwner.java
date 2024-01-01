@@ -1,5 +1,5 @@
 package com.bridgelabz;
-import com.bridgelabz.model.Car;
+import com.bridgelabz.Car;
 
 /*
  * @Description -Notify the manager about parking lot status

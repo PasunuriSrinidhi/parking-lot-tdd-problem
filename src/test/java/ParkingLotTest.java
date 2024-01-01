@@ -215,6 +215,31 @@ class ParkingLotTest {
         cars.add(new Car("Blue"));
         return cars;
     }
+   @Test
+    public void givenALot_LocationPlateNumberAttendantColorBrand_ReturnInvestigateARobberyCase() {
+        
+        ParkingAttendant parkingAttendant = new ParkingAttendant();
+        parkingAttendant.parkingAttendantName = "John Doe";
+
+        ParkingLot parkingLot1 = new ParkingLot();
+        parkingLot1.addCar(new Car("ABC123", "Blue", "Toyota"), "A1");
+        parkingLot1.addCar(new Car("XYZ789", "Blue", "Toyota"), "B2");
+
+        ParkingLot parkingLot2 = new ParkingLot();
+        parkingLot2.addCar(new Car("DEF456", "Red", "Honda"), "C3");
+        parkingLot2.addCar(new Car("GHI789", "Blue", "Toyota"), "D4");
+
+        parkingAttendant.addParkingLot(parkingLot1);
+        parkingAttendant.addParkingLot(parkingLot2);
+
+        // Call the method to be tested
+        List<String> result = parkingAttendant.getLocationOfParkedColorAndBrandCars("Blue", "Toyota");
+
+        // Verify the result
+        assertEquals(2, result.size());
+        assertEquals("John Doe A1", result.get(0));
+        assertEquals("John Doe D4", result.get(1));
+    }
 }
 
 

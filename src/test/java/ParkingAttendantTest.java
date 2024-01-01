@@ -107,10 +107,8 @@ class ParkingAttendantTest {
 		List<String> locations = policeDepartment.getLocationOfParkedBrandCars("BMW");
 
 		assertEquals(2, locations.size());
-		assertTrue(locations
-				.contains("Parking Lot " + parkingLot1.hashCode() + ", License Plate: " + bmwCar1.getLicensePlate()));
-		assertTrue(locations
-				.contains("Parking Lot " + parkingLot2.hashCode() + ", License Plate: " + bmwCar2.getLicensePlate()));
+		assertTrue(locations.contains("Parking Lot " + parkingLot1.hashCode() + ", License Plate: " + bmwCar1.getLicensePlate()));
+		assertTrue(locations.contains("Parking Lot " + parkingLot2.hashCode() + ", License Plate: " + bmwCar2.getLicensePlate()));
 
 	}
 }

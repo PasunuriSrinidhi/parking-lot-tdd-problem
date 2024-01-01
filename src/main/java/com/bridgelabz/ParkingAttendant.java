@@ -2,6 +2,7 @@ package com.bridgelabz;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import com.bridgelabz.Driver;
 
 public class ParkingAttendant {
 	List<ParkingLot> parkingLots = new ArrayList<>();
@@ -48,6 +49,13 @@ public class ParkingAttendant {
 
 		parklot.parkCar(car,driver);
 
+	}
+	public List<String> getLocationOfParkedWhiteCars() {
+		List<String> locations = new ArrayList<>();
+		for (ParkingLot parkingLot : parkingLots) {
+			locations.addAll(parkingLot.getLocationOfParkedWhiteCars());
+		}
+		return locations;
 	}
 	public void directLargeCar(Car car, Driver driver) {
 

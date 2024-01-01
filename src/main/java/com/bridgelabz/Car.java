@@ -1,5 +1,6 @@
 package com.bridgelabz;
 import java.time.LocalTime;
+import com.bridgelabz.CarType;
 
 public class Car {
 

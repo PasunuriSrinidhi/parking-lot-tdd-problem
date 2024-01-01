@@ -4,9 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import com.bridgelabz.CarType;
 import com.bridgelabz.Driver;
+import com.bridgelabz.CarType;
 import com.bridgelabz.Car;
 import com.bridgelabz.ParkingAttendant;
 import com.bridgelabz.ParkingLot;

@@ -59,11 +59,19 @@ public class ParkingAttendant {
 		}
 		return locations;
 	}
+	
 
 	public List<String> getLocationOfParkedCarsbyBrandAndColor(String color,String brand) {
 		List<String> locations = new ArrayList<>();
 		for (ParkingLot parkingLot : parkingLots) {
 			locations.addAll(parkingLot.getLocationOfParkedbyColorAndBrand(color,brand) );
+		}
+		return locations;
+	}
+	public List<String> getLocationOfParkedCarsByBrand(String brand) {
+		List<String> locations = new ArrayList<>();
+		for (ParkingLot parkingLot : parkingLots) {
+			locations.addAll(parkingLot.getLocationOfParkedCarsByBrand(brand));
 		}
 		return locations;
 	}

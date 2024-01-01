@@ -147,15 +147,36 @@ public class ParkingLot {
 		}
 		return null;
 	}
-	public List<String> getLocationOfParkedWhiteCars() {
+	public List<String> getLocationOfParkedbyColor(String color) {
 		List<String> locations = new ArrayList<>();
 		for (Car car : parkedCars) {
-			if (car.getColor().equalsIgnoreCase("White")) {
+			if (car.getColor().equalsIgnoreCase(color)) {
+				locations.add("Parking Lot " + hashCode());
+				System.out.println(
+						"Car with color " + color + "and location " + hashCode() + " found in the parking lot.");
+			}
+		}
+		return locations;
+	}
+        
+	/*
+	 * @Description - Finds the location of the car with the color and brand
+	 *
+	 * @param - color - color of the car to be found brand - brand of the car to be
+	 * found
+	 *
+	 * @return - location of the car if found, null otherwise
+	 */
+	public List<String> getLocationOfParkedbyColorAndBrand(String color, String brand) {
+		List<String> locations = new ArrayList<>();
+		for (Car car : parkedCars) {
+			if (car.getColor().equalsIgnoreCase(color) && car.getBrand().equalsIgnoreCase(brand)) {
 				locations.add("Parking Lot " + hashCode());
 			}
 		}
 		return locations;
 	}
+
 	/*
 	 * @Description - adds observers to the list of observers
 	 * 

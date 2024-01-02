@@ -111,4 +111,33 @@ class ParkingAttendantTest {
 		assertTrue(locations.contains("Parking Lot " + parkingLot2.hashCode() + ", License Plate: " + bmwCar2.getLicensePlate()));
 
 	}
+@Test
+	void givenALot_PoliceWantsToKnowCarsParkedInLast30Mins_ReturnInvestigateOfBombThreat() {
+		System.out.println("Test Get Cars Parked in the Last 30 Minutes");
+
+		Car car1 = new Car("WB-12-1234", "Toyota", "White", CarType.SMALL);
+		Car car2 = new Car("WB-12-5678", "Honda", "Blue", CarType.MEDIUM);
+	
+		parkingLot1.parkCar(car1, Driver.Handicapped);
+		parkingLot2.parkCar(car2, Driver.Non_HandiCapped);
+	
+
+		waitMinutes(30);
+
+		List<String> locations = policeDepartment.getCarsParkedLast30Minutes();
+
+		assertEquals(2, locations.size());
+		assertTrue(locations
+				.contains("License Plate: " + car1.getLicensePlate() + ", Parking Lot: " + parkingLot1.hashCode()));
+		assertTrue(locations
+				.contains("License Plate: " + car2.getLicensePlate() + ", Parking Lot: " + parkingLot2.hashCode()));
+	}
+
+	private void waitMinutes(int minutes) {
+		try {
+			Thread.sleep(minutes * 60 * 1000);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
+	}
 }

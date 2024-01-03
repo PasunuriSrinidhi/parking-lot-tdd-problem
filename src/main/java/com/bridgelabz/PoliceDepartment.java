@@ -31,4 +31,15 @@ public List<String> getCarsParkedLast30Minutes() {
         return parkingAttendant.carsParkedLast30Minutes();
     }
 
+/*
+	 * @Description - gets the location of the cars parked in rows B or D in parking lot
+	 * 
+	 * @param - none
+	 * 
+	 * @return - list of locations of the cars parked in rows B or D in parking lot
+	 */
+	public List<String> smallHandicapCarsOnRowsBorD() {
+		return parkingAttendant.getSmallHandicapCarsOnRowsBorD();
+	}
+
 }

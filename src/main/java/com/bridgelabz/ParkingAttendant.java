@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import com.bridgelabz.Driver;
+import com.bridgelabz.CarType;
 
 public class ParkingAttendant {
 	List<ParkingLot> parkingLots = new ArrayList<>();
@@ -106,6 +107,43 @@ public List<String> carsParkedLast30Minutes() {
 
 		return carsParkedLast30Minutes;
 	}
+/*
+	 * @Description - waits for the given number of minutes
+	 * 
+	 * @param - minutes - number of minutes to wait
+	 * 
+	 * @return - none
+	 */
+	public void waitMinutes(int minutes) {
+		try {
+			Thread.sleep(minutes * 60 * 1000);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
+	}
+
+	/*
+	 * @Description - gets the small cars parked on rows B and D
+	 * 
+	 * @param - none
+	 * 
+	 * @return - list of small cars parked on rows B and D
+	 */
+	public List<String> getSmallHandicapCarsOnRowsBorD() {
+		List<String> result = new ArrayList<>();
+
+		for (ParkingLot parkingLot : parkingLots) {
+			for (Car car : parkingLot.getParkedCars()) {
+				if (car.getSize() == CarType.SMALL
+						&& (car.getCarRow().charAt(0) == 'B' || car.getCarRow().charAt(0) == 'D')) {
+					result.add("Parking Lot: " + parkingLot.hashCode() + ", License Plate: " + car.getLicensePlate());
+				}
+			}
+
+		}
+		return result;
+	}
+
 }
 
 	

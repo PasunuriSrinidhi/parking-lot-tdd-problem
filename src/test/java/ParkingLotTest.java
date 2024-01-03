@@ -24,7 +24,7 @@ import com.bridgelabz.ParkingObservers;
  */
 class ParkingLotTest {
 	ParkingLot parkingLot;
-	ParkingManager owner;
+	ParkingOwner owner;
 	ParkingObservers airportSecurity;
 	Car car1;
 	Car car2;

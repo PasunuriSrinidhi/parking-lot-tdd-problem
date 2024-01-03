@@ -268,4 +268,13 @@ public class ParkingLot {
         System.out.println("All parking lots are full. Unable to park car.");
     }
 
+ public List<String> getAllParkedCarsInfo() {
+        List<String> carDetails = new ArrayList<>();
+        for (Map.Entry<String, Car> entry : parkedCars.entrySet()) {
+            Car car = entry.getValue();
+            String info = "Plate: " + entry.getKey()+ ", Color: " + car.getColor() + ", Size: " + car.getSize();
+            carDetails.add(info);
+        }
+        return carDetails;
+    }
 }

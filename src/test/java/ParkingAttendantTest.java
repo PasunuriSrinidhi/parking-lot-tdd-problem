@@ -112,7 +112,7 @@ class ParkingAttendantTest {
 
 	}
 @Test
-	void givenALot_PoliceWantsToKnowCarsParkedInLast30Mins_ReturnInvestigateOfBombThreat() {
+	void givenALot_CarsParkedInLast30Mins_ReturnBombThreat() {
 		System.out.println("Test Get Cars Parked in the Last 30 Minutes");
 
 		Car car1 = new Car("WB-12-1234", "Toyota", "White", CarType.SMALL);
@@ -141,7 +141,7 @@ class ParkingAttendantTest {
 		}
 	}
       @Test
-	void givenALot_PoliceWantsToKnowLocationAndInfoOfSmallHanicapCarsInRowBorD_ReturnInvestigateOfHandicapPermitFraud(){
+	void givenALot_LocationAndInfoOfSmallHandicapCarsInRowBorD_ReturnHandicapPermitFraud(){
 		System.out.println("Test Cars Parked in Row B or D");
 		Car car1 = new Car("WB-12-1234", "Toyota", "White", CarType.SMALL, "B1");
 		Car car2 = new Car("WB-12-5678", "Honda", "Blue", CarType.SMALL, "D2");
@@ -158,7 +158,28 @@ class ParkingAttendantTest {
 		assertTrue(locations.contains("Parking Lot: " + parkingLot1.hashCode() + ", License Plate: " + car1.getLicensePlate()));
 		assertTrue(locations.contains("Parking Lot: " + parkingLot2.hashCode() + ", License Plate: " + car2.getLicensePlate()));
 
-		
 	}
+     @Test
+     void givenALot_InfoOfAllParkedCars_ReturnFraudulentPlateNumber() {
+        // Setup: Create a parking lot and park some cars
+        ParkingLot parkingLot = new ParkingLot();
+        Car car1 = new Car("ABC123", "Toyota", "Blue", "Compact");
+        Car car2 = new Car("XYZ789", "Honda", "Red", "Sedan");
+        Car car3 = new Car("DEF456", "Ford", "Black", "SUV");
+        parkingLot.parkCar("ABC123", car1);
+        parkingLot.parkCar("XYZ789", car2);
+        parkingLot.parkCar("DEF456", car3);
 
+        // Test: Retrieve all parked cars info
+        List<String> parkedCarsInfo = parkingLot.getAllParkedCarsInfo();
+
+        // Verify: Check if the list contains the correct information for each parked car
+        assertEquals(3, parkedCarsInfo.size());
+        assertTrue(parkedCarsInfo.contains("Plate: ABC123, Make: Toyota, Color: Blue, Size: Compact"));
+        assertTrue(parkedCarsInfo.contains("Plate: XYZ789, Make: Honda, Color: Red, Size: Sedan"));
+        assertTrue(parkedCarsInfo.contains("Plate: DEF456, Make: Ford, Color: Black, Size: SUV"));
+    }
 }
+
+
+

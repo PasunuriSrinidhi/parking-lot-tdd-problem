@@ -140,4 +140,25 @@ class ParkingAttendantTest {
 			Thread.currentThread().interrupt();
 		}
 	}
+      @Test
+	void givenALot_PoliceWantsToKnowLocationAndInfoOfSmallHanicapCarsInRowBorD_ReturnInvestigateOfHandicapPermitFraud(){
+		System.out.println("Test Cars Parked in Row B or D");
+		Car car1 = new Car("WB-12-1234", "Toyota", "White", CarType.SMALL, "B1");
+		Car car2 = new Car("WB-12-5678", "Honda", "Blue", CarType.SMALL, "D2");
+
+
+		parkingLot1.parkCar(car1, Driver.Handicapped);
+		parkingLot2.parkCar(car2, Driver.Handicapped);
+
+
+		List<String> locations = policeDepartment.smallHandicapCarsOnRowsBorD();
+
+		assertEquals(2, locations.size());
+
+		assertTrue(locations.contains("Parking Lot: " + parkingLot1.hashCode() + ", License Plate: " + car1.getLicensePlate()));
+		assertTrue(locations.contains("Parking Lot: " + parkingLot2.hashCode() + ", License Plate: " + car2.getLicensePlate()));
+
+		
+	}
+
 }

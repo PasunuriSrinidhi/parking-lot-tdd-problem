@@ -11,11 +11,12 @@ public class Car {
 	private LocalTime unparktime;
 	private CarType size;
 
-	public Car(String licensePlate, String brand, String color,CarType size) {
+	public Car(String licensePlate, String brand, String color,CarType size,boolean isHandicap) {
 		this.licensePlate = licensePlate;
 		this.brand = brand;
 		this.color = color;
 		this.size= size;
+		this.isHandicap = isHandicap;
 	}
 
 	public String getLicensePlate() {

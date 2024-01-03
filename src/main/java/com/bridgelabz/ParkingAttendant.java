@@ -143,8 +143,14 @@ public List<String> carsParkedLast30Minutes() {
 		}
 		return result;
 	}
-
+	private static void showAllParkedCars(ParkingLot lot) {
+        System.out.println("Police Investigation: All Parked Cars in " + lot.getLotId());
+        List<String> parkedCarDetails = lot.getAllParkedCarsInfo();
+        parkedCarDetails.forEach(System.out::println);
+    }
 }
+
+
 
 	
 
